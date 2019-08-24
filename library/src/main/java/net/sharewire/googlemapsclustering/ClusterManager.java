@@ -48,6 +48,7 @@ public class ClusterManager<T extends ClusterItem> implements GoogleMap.OnCamera
      *
      * @param <T> the type of an item managed by {@link ClusterManager}.
      */
+    @Deprecated
     public interface Callbacks<T extends ClusterItem> {
         /**
          * Called when a marker representing a cluster has been clicked.
@@ -67,6 +68,20 @@ public class ClusterManager<T extends ClusterItem> implements GoogleMap.OnCamera
          * <code>false</code> otherwise (i.e., the default behavior should occur). The default behavior is for the camera
          * to move to the marker and an info window to appear.
          */
+        boolean onClusterItemClick(@NonNull T clusterItem);
+    }
+
+    /**
+     * Called when an individual ClusterItem is clicked.
+     */
+    public interface OnClusterClickListener<T extends ClusterItem> {
+        boolean onClusterClick(@NonNull Cluster<T> cluster);
+    }
+
+    /**
+     * Called when an individual ClusterItem's Info Window is clicked.
+     */
+    public interface OnClusterItemClickListener<T extends ClusterItem> {
         boolean onClusterItemClick(@NonNull T clusterItem);
     }
 
@@ -100,8 +115,25 @@ public class ClusterManager<T extends ClusterItem> implements GoogleMap.OnCamera
      * @param callbacks the callback that's invoked when a cluster or an individual item is clicked.
      *                  To unset the callback, use <code>null</code>.
      */
+    @Deprecated
     public void setCallbacks(@Nullable Callbacks<T> callbacks) {
         mRenderer.setCallbacks(callbacks);
+    }
+
+    /**
+     * Sets a callback that's invoked when a Cluster is tapped. Note: For this listener to function,
+     * the ClusterManager must be added as a click listener to the map.
+     */
+    public void setOnClusterClickListener(@Nullable OnClusterClickListener<T> listener) {
+        mRenderer.setOnClusterClickListener(listener);
+    }
+
+    /**
+     * Sets a callback that's invoked when an individual ClusterItem is tapped. Note: For this
+     * listener to function, the ClusterManager must be added as a click listener to the map.
+     */
+    public void setOnClusterItemClickListener(@Nullable OnClusterItemClickListener<T> listener) {
+        mRenderer.setOnClusterItemClickListener(listener);
     }
 
     /**
