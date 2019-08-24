@@ -1,6 +1,6 @@
 package net.sharewire.googlemapsclustering;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * An object representing a single cluster item (marker) on the map.

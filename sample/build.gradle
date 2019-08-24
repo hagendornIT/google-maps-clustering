@@ -27,7 +27,7 @@ android {
 
 dependencies {
     implementation project(':library')
-    implementation "com.android.support:support-v4:$supportVersion"
-    implementation "com.android.support:appcompat-v7:$supportVersion"
+    implementation "androidx.legacy:legacy-support-v4:$androidxLegacyVersion"
+    implementation "androidx.appcompat:appcompat:$androidxAppcompatVersion"
     implementation "com.google.android.gms:play-services-maps:$playServicesVersion"
 }
